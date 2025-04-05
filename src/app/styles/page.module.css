@@ -1,0 +1,90 @@
+.landingPage {
+  padding: 50px 0px;
+  min-height: 100vh;
+  background-image: url('/images/landing-bg.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.landingPageBox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+.appBar {
+  position: static;
+  background-color: transparent !important;
+  
+}
+
+
+.glassCard {
+  background: rgba(127, 164, 118, 0.15) !important; /* Slight green tint */
+  border-radius: 12px !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Soft glass edge */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Smooth shadow */
+  padding: 0px;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 30px !important;
+  max-height: 85vh !important;
+}
+
+.heroSection {
+  background-size: cover;
+  background-position: center;
+  min-height: auto;
+  padding: 40px 0px;
+}
+
+.heroSectionLeftCard {
+  background: transparent !important;
+  /* border: 1px solid rgba(255, 255, 255, 0.2); */
+  border-radius: 8px !important;
+  color: #fff !important;
+  padding: 20px;
+}
+
+.heroButtonBox{
+  display: flex;
+  gap: 20px;
+}
+
+.customButton{
+  min-width: 50px !important;
+  background: rgba(127, 164, 118, 0.15) !important; 
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Soft glass edge */
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Smooth shadow */
+  height: 44px;
+  border-radius: 12px !important;
+  text-transform: none !important;
+}
+
+.buttonSuccess {
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Smooth shadow */
+  border: 2px solid #4caf50; /* Green border for the success button */
+  border-radius: 8px; /* Rounded corners */
+}
+
+.buttonPrimary {
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Smooth shadow */
+  border: 2px solid #1976d2; /* Blue border for the primary button */
+  border-radius: 8px; /* Rounded corners */
+}
+
+
+.idCard {
+  width: 550px;
+  border-radius: 8px !important;
+  overflow: hidden;
+  background: transparent !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  border: 1px solid #ccc;
+  padding: 16px; /* Equivalent to p: 2 (which is 8px per side) */
+  color: #fff !important;
+}
