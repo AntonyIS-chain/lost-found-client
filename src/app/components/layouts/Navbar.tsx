@@ -13,10 +13,14 @@ export default function ButtonAppBar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" className={styles.appBar}>
         <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Saka ID
-          </Typography>
-          <Link href="/sign-in">
+          <Box sx={{ flexGrow: 1 }}>
+            <Link href="/" >
+              <Typography variant="h6" component="div" >
+                Saka ID
+              </Typography>
+            </Link>
+          </Box>
+          <Link href="/signin">
             <Button color="inherit">Sign In</Button>
           </Link>
         </Toolbar>
