@@ -1,10 +1,10 @@
-import DefaultLayout from "./components/layouts/DefaultLayout";
-import Hero from "./components/pages/Hero";
+import Dashboard from "./components/layout/Dashboard";
+import Hero from "./components/pages/landingPage/Hero";
 
-export default function Home() {
+export default function Page() {
   return (
-    <DefaultLayout>
-       <Hero/>
-    </DefaultLayout>
+   <Dashboard>
+      <Hero />
+   </Dashboard>
   );
 }
