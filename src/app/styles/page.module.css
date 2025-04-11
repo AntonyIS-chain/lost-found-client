@@ -122,6 +122,7 @@
 
 .idImage {
   object-fit: cover; /* Ensure image covers the entire card */
+  border-radius: 15px !important;
 }
 
 .sessionSection {
@@ -161,6 +162,7 @@
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center;
+  border-radius: 12px !important;
 }
 
 .loginButton {

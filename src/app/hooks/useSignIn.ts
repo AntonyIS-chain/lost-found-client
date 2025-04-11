@@ -9,6 +9,10 @@ interface LoginResponse {
     results: {
       access_token: string;
       refresh_token: string;
+      session_user: {
+        id : string;
+        role : string;
+      }
     };
     message: string;
     statusCode: number;

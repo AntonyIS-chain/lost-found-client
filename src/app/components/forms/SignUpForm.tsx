@@ -2,8 +2,10 @@
 import { useState } from "react";
 import { Box, Button, Link, Typography } from "@mui/material";
 import styles from "../../styles/page.module.css";
-import CustomField from "../ui/CustomField";
+import { CustomField } from "../ui/CustomField";
 import Image from "next/image";
+import useSignUp from "../../hooks/useSignUp"; // Make sure the path is correct
+import { useRouter } from "next/navigation";
 
 export default function SignUpForm() {
   const [email, setEmail] = useState("");
@@ -11,25 +13,13 @@ export default function SignUpForm() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  };
-
-  const handlePhoneNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPhoneNumber(event.target.value);
-  };
-
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
-
-  const handleConfirmPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setConfirmPassword(event.target.value);
-  };
+  const { signUp, loading } = useSignUp();
 
   const handleSubmit = async () => {
-    // Basic validation
+    setError(null);
+
     if (!email || !phoneNumber || !password || !confirmPassword) {
       setError("Please fill in all fields.");
       return;
@@ -41,28 +31,18 @@ export default function SignUpForm() {
     }
 
     try {
-      const response = await fetch("/api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          phoneNumber,
-          password,
-        }),
-      });
+      const role_id = 3
+      const role_name = "Guest"
+      const response = await signUp(email, role_id, role_name, password); 
 
-      if (!response.ok) {
-        const data = await response.json();
-        setError(data.message || "Sign up failed.");
-        return;
+      if (response?.signup?.success) {
+        console.log("Signup successful:", response.signup.results);
+        router.push("/sign-in"); // Redirect after successful signup
+      } else {
+        setError(response?.signup?.message || "Sign up failed.");
       }
-
-      // Handle successful signup (redirect, show success message, etc.)
-      console.log("Account created successfully!");
     } catch (err) {
-      console.error("Login error:", err);
+      console.error("Signup error:", err);
       setError("Something went wrong. Please try again later.");
     }
   };
@@ -71,7 +51,7 @@ export default function SignUpForm() {
     <Box className={styles.sessionBox}>
       <Box className={styles.sessionImageBox}>
         <Image
-          src="/images/appIcon.png"
+          src="/images/logo.png"
           alt="Kenyan sample ID"
           width={100}
           height={100}
@@ -84,7 +64,7 @@ export default function SignUpForm() {
         value={email}
         type="email"
         id="email-input"
-        onChange={handleEmailChange}
+        onChange={(e) => setEmail(e.target.value)}
       />
 
       <CustomField
@@ -92,7 +72,7 @@ export default function SignUpForm() {
         value={phoneNumber}
         type="tel"
         id="phone-input"
-        onChange={handlePhoneNumberChange}
+        onChange={(e) => setPhoneNumber(e.target.value)}
       />
 
       <CustomField
@@ -100,7 +80,7 @@ export default function SignUpForm() {
         value={password}
         type="password"
         id="password-input"
-        onChange={handlePasswordChange}
+        onChange={(e) => setPassword(e.target.value)}
       />
 
       <CustomField
@@ -108,7 +88,7 @@ export default function SignUpForm() {
         value={confirmPassword}
         type="password"
         id="confirm-password-input"
-        onChange={handleConfirmPasswordChange}
+        onChange={(e) => setConfirmPassword(e.target.value)}
       />
 
       {error && (
@@ -118,8 +98,14 @@ export default function SignUpForm() {
       )}
 
       <Box className={styles.buttonSection}>
-        <Button className={`${styles.button} ${styles.loginButton}`} onClick={handleSubmit}>
-          <Typography className={styles.buttonText}>Create Account</Typography>
+        <Button
+          className={`${styles.button} ${styles.loginButton}`}
+          onClick={handleSubmit}
+          disabled={loading}
+        >
+          <Typography className={styles.buttonText}>
+            {loading ? "Creating..." : "Create Account"}
+          </Typography>
         </Button>
       </Box>
 

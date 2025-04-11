@@ -2,14 +2,18 @@
 import { useState } from "react";
 import { Box, Button, Link, Typography } from "@mui/material";
 import styles from "../../styles/page.module.css";
-import CustomField from "../ui/CustomField";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+
 import useSignIn from "../../hooks/useSignIn";
+import { useAuth } from "@/app/context/AuthContext";
+import { CustomField } from "../ui/CustomField";
 
 export default function SignInForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [formError, setFormError] = useState<string | null>(null);
+  const router = useRouter();
 
   const { signIn, loading, error } = useSignIn();
 
@@ -21,20 +25,28 @@ export default function SignInForm() {
     setPassword(event.target.value);
   };
 
+  const { setAccessToken, setRefreshToken, setUser } = useAuth();
+
   const handleSubmit = async () => {
     if (!email || !password) {
       setFormError("Please fill in all fields.");
       return;
     }
-
+  
     try {
       const data = await signIn(email, password);
-
+  
       if (data?.login.success) {
-        // Store token, redirect, or notify success
-        console.log("Login successful!", data);
-        localStorage.setItem("accessToken", data.login.results.access_token);
-        // router.push("/dashboard") or similar
+        const { access_token, refresh_token, session_user } = data.login.results;
+  
+        localStorage.setItem("accessToken", access_token);
+        localStorage.setItem("refresh_token", refresh_token);
+        localStorage.setItem("user", JSON.stringify(session_user));
+  
+        setAccessToken(access_token);
+        setRefreshToken(refresh_token);
+        setUser(session_user);
+        router.push("/");
       } else {
         setFormError(data?.login.message || "Login failed.");
       }
@@ -43,12 +55,13 @@ export default function SignInForm() {
       setFormError("Something went wrong. Please try again later.");
     }
   };
+  
 
   return (
     <Box className={styles.sessionBox}>
       <Box className={styles.sessionImageBox}>
         <Image
-          src="/images/appIcon.png"
+          src="/images/logo.png"
           alt="Kenyan sample ID"
           width={100}
           height={100}

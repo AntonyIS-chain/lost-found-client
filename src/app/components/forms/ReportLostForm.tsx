@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Box, Button,Card,CardContent,Grid,Typography } from "@mui/material";
 import styles from "../../styles/page.module.css";
-import CustomField from "../ui/CustomField";
+import {CustomField, CustomFileInput} from "../ui/CustomField";
 
 export default function ReportLostForm() {
   const [idNumber, setIdNumber] = useState("");
@@ -28,9 +28,12 @@ export default function ReportLostForm() {
   };
 
   const handleUploadChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFile(event.target.value);
+    const uploadedFile = event.target.files?.[0];
+    if (uploadedFile) {
+      setFile(uploadedFile.name); // just storing filename for now
+      console.log("Uploaded file:", uploadedFile);
+    }
   };
-
 
   return (
     <Card className={styles.reportCard}>
@@ -76,14 +79,18 @@ export default function ReportLostForm() {
                     onChange={handlePhoneChange}
                 />
 
-                <CustomField
-                    label="Upload file"
-                    value={file}
-                    type="text"
-                    id="file-input"
-                    onChange={handleUploadChange}
+                <CustomFileInput
+                  label="Upload File"
+                  id="file-input"
+                  accept=".pdf,.jpg,.png"  // Optional: Limit accepted file types
+                  onChange={handleUploadChange}
                 />
 
+                {/* {file && (
+                  <Typography sx={{ color: "white", mt: 1 }}>
+                    Selected: {file}
+                  </Typography>
+                )} */}
                 {/* Button Section */}
                 <Box className={styles.buttonSection}>
                     <Button className={`${styles.button} ${styles.loginButton}`}>

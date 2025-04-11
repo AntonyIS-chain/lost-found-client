@@ -25,3 +25,14 @@ export interface SessionUser {
     userID :string;
     role : string
 }
+
+export interface UserIdentityCard {
+  id: string;
+  id_number: string;
+  full_name: string;
+  location_found: string;
+  date_reported: string; 
+  status: 'pending' | 'found' | 'returned'; 
+  created_at: string; 
+  updated_at: string; 
+}
