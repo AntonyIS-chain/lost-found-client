@@ -1,21 +1,18 @@
 import { gql } from "@apollo/client";
 
-export const GET_LOST_IDS = gql`
-    query GetLostIds {
-        getLostIds {
-        message
-        statusCode
-        success
-        results {
-            created_at
-            date_reported
-            full_name
-            id
-            id_number
-            location_found
-            status
-            updated_at
-        }
+export const GET_ID_DOCUMENTS = gql`
+    query GetIDDocuments($idType: String!) {
+        GetIDDocuments(IDType: $idType) {
+            message
+            statusCode
+            success
+            results {
+                full_name
+                id
+                id_number
+                location
+                status
+            }
         }
     }
 `;

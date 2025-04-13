@@ -244,6 +244,44 @@
   color: #fff;
 }
 
+.switchBox{
+  /* border: 1px solid #fff !important; */
+  border-radius: 12px;
+  width: 50%;
+  height: 46px;
+  display: flex;
+  gap: 1px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.2), 
+}
+
+
+
+.switchBoxButton{
+  height: 44px !important;
+  background: transparent !important;
+  border-radius: 8px !important;
+  text-transform: none !important;
+  width: 50%;
+  font-family: var(--font-outfit) !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  line-height: 25px !important;
+  color: #000 !important;
+
+}
+
+.switchBoxButtonActive{
+  color: #000 !important;
+  border: 2px solid #fff !important; /* Soft glass edge */
+  border-radius: 8px !important;
+  color: #fff !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  line-height: 25px !important;
+  color: #fff !important;
+}
+
 
 @media (min-width: 600px) {
   .sessionCard {

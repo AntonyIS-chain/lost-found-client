@@ -19,15 +19,18 @@ export const SIGN_IN_MUTATION = gql`
 `;
 
 export const SIGN_UP_MUTATION = gql`
-  mutation Signup($email: String!, $role_id: Int!, $role_name: String!, $password: String!) {
-    signup(email: $email, role_id: $role_id, role_name: $role_name, password: $password) {
+  mutation Signup($email: String!, $role_id: Int!, $role_name: String!, $password: String!, $phone_number: String) {
+    signup(email: $email, role_id: $role_id, role_name: $role_name, password: $password, phone_number: $phone_number) {
       message
       statusCode
       success
       results {
-        email
-        role_id
-        role_name
+        access_token
+        refresh_token
+        session_user {
+          user_id
+          role
+        }
       }
     }
   }

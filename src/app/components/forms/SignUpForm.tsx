@@ -6,6 +6,7 @@ import { CustomField } from "../ui/CustomField";
 import Image from "next/image";
 import useSignUp from "../../hooks/useSignUp"; // Make sure the path is correct
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function SignUpForm() {
   const [email, setEmail] = useState("");
@@ -16,7 +17,8 @@ export default function SignUpForm() {
   const router = useRouter();
 
   const { signUp, loading } = useSignUp();
-
+  const { setAccessToken, setRefreshToken, setUser } = useAuth();
+  
   const handleSubmit = async () => {
     setError(null);
 
@@ -33,11 +35,19 @@ export default function SignUpForm() {
     try {
       const role_id = 3
       const role_name = "Guest"
-      const response = await signUp(email, role_id, role_name, password); 
+      const response = await signUp(email, role_id, role_name, password, phoneNumber); 
 
       if (response?.signup?.success) {
-        console.log("Signup successful:", response.signup.results);
-        router.push("/sign-in"); // Redirect after successful signup
+        const { access_token, refresh_token, session_user } = response.signup.results
+  
+        localStorage.setItem("accessToken", access_token);
+        localStorage.setItem("refresh_token", refresh_token);
+        localStorage.setItem("user", JSON.stringify(session_user));
+  
+        setAccessToken(access_token);
+        setRefreshToken(refresh_token);
+        setUser(session_user);
+        router.push("/");
       } else {
         setError(response?.signup?.message || "Sign up failed.");
       }
