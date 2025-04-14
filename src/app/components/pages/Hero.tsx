@@ -1,8 +1,8 @@
 "use client"
 import styles from "../../styles/page.module.css";
 import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
-import IDCard from "../ui/IDCard";
 import CustomButton from "../ui/Button";
+import CustomIDCard from "../ui/IDCard";
 
 export default function Hero() {
   const handleLostIdClick = () => {
@@ -23,7 +23,7 @@ export default function Hero() {
           <Card elevation={0} className={styles.heroSectionLeftCard}>
             <CardContent>
               <Typography variant="h3" component="h1" gutterBottom>
-                Lost Your ID? We've Got You Covered.
+                Lost Your ID? We&apos;ve Got You Covered.
               </Typography>
               <Typography variant="body1" sx={{ mb: 3 }}>
                 Reclaim your lost identity documents quickly and securely. Our community-driven platform connects finders with rightful owners — making it easier than ever to reunite with your lost ID.
@@ -38,7 +38,7 @@ export default function Hero() {
 
         {/* Right: Image */}
         <Grid size={6}>
-          <IDCard />
+          <CustomIDCard />
         </Grid>
       </Grid>
     </Box>

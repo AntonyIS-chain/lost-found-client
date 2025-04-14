@@ -1,7 +1,7 @@
 "use client"
 import { Box, Card,CardContent, Grid } from "@mui/material";
 import styles from "../../../styles/page.module.css";
-import IdCard from "../../../components/ui/IdCard";
+import IdCard from "../../../components/ui/CustonIdCard";
 import Dashboard from "@/app/components/layout/Dashboard";
 import ReportFoundForm from "@/app/components/forms/ReportFoundForm";
 

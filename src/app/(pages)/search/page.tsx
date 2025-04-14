@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import useGetIDDocuments from "@/app/hooks/useGetIDDocuments";
 import CustomSpinnner from "@/app/components/ui/Spinner";
+import CustomError from "@/app/components/ui/Error";
 
 export default function Page() {
   const router = useRouter();
@@ -25,19 +26,21 @@ export default function Page() {
     setSearchText(""); // Optional: clear search on switch
   };
 
-  const filteredIds = data?.results.filter((IDdocument) =>
-    (IDdocument.full_name ?? "").toLowerCase().includes(searchText.toLowerCase()) ||
-    (IDdocument.location ?? "").toLowerCase().includes(searchText.toLowerCase()) ||
-    IDdocument.id_number.includes(searchText)
-  ) || [];
+  const filteredIds = Array.isArray(data?.results)
+  ? data.results.filter((IDdocument) =>
+      (IDdocument.full_name ?? "").toLowerCase().includes(searchText.toLowerCase()) ||
+      (IDdocument.location ?? "").toLowerCase().includes(searchText.toLowerCase()) ||
+      IDdocument.id_number.includes(searchText)
+    )
+  : [];
+
 
   const handleOnClick = (id: string) => {
     if (id) {
-      router.push(`/lost-id/details?id=${id}`);
+      router.push(`/report/${idType}/${id}`);
     }
   };
 
-  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <Dashboard>
@@ -70,11 +73,14 @@ export default function Page() {
                 Found
               </Button>
             </Box>
+            {error && (
+                <CustomError message={error.message || "An error occurred."} />
+              )}
 
             { loading ? (
                 <CustomSpinnner />
             ) : (
-              <Box>
+              <Box sx={{height:"40vh", overflowY: "auto" }}  className={styles.scrollBox}>
                 <Grid container spacing={2}>
                   {filteredIds.map((id, index) => (
                     <Grid size={{ xs: 12, md: 3 }} key={index}>
@@ -83,17 +89,18 @@ export default function Page() {
                         onClick={() => handleOnClick(id.id_number)}
                       >
                         <CardContent>
-                          <Typography variant="h6" component="div">
-                            {id.full_name}
+                          <Typography className={styles.idLabelSpan}>
+                            Full Name:{" "}
+                            <Typography component="span" className={styles.idLabel}>
+                              {id.full_name}
+                            </Typography>
                           </Typography>
-
                           <Typography className={styles.idLabelSpan}>
                             ID Number:{" "}
                             <Typography component="span" className={styles.idLabel}>
                               {id.id_number}
                             </Typography>
                           </Typography>
-
                           <Typography className={styles.idLabelSpan}>
                             Location:{" "}
                             <Typography component="span" className={styles.idLabel}>

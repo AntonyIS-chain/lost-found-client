@@ -1,7 +1,7 @@
 "use client"
 import { Box, Button, Card,CardContent, Grid, Typography } from "@mui/material";
 import styles from "../../../styles/page.module.css";
-import IdCard from "../../ui/IdCard";
+import IdCard from "../../ui/CustonIdCard";
 import { useRouter } from "next/navigation"; 
 
 

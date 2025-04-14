@@ -1,5 +1,6 @@
 import { Box, Card, CardContent, Typography, Avatar, Grid } from "@mui/material";
 import styles from "../../styles/page.module.css";
+import Image from "next/image";
 
 export default function IDCard() {
   return (
@@ -7,11 +8,15 @@ export default function IDCard() {
       <CardContent>
         {/* Header with Coat of Arms and Title */}
         <Box display="flex" justifyContent="space-between" alignItems="center" mb={1}>
-          <img
-            src="/images/arms.jpg" // Replace with your actual image
-            alt="Kenya Coat of Arms"
-            style={{ width: 50 }}
-          />
+
+           <Image
+             src="/images/arms.jpg" 
+             alt="Kenya Coat of Arms"
+             width={50}
+              height={50}
+              layout="responsive"
+              className={styles.idImage}
+            />
           <Typography variant="subtitle2" fontWeight={700}>
             REPUBLIC OF KENYA
           </Typography>
