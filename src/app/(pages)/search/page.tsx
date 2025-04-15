@@ -83,7 +83,7 @@ export default function Page() {
               <Box sx={{height:"40vh", overflowY: "auto" }}  className={styles.scrollBox}>
                 <Grid container spacing={2}>
                   {filteredIds.map((id, index) => (
-                    <Grid size={{ xs: 12, md: 3 }} key={index}>
+                    <Grid size={{ xs: 12, md: 3 }} key={index} >
                       <Card
                         className={styles.idCard}
                         onClick={() => handleOnClick(id.id_number)}
@@ -116,15 +116,12 @@ export default function Page() {
                           </Typography>
 
                           <Box mt={2}>
-                            <Typography variant="caption" className={styles.idLabelSpan}>
-                              ID Image
-                            </Typography>
                             <Box className={styles.idImageWrapper} sx={{ height: 120, mt: 1 }}>
                               <Image
                                 src="/images/idfront.jpg"
                                 alt="Kenyan sample ID"
                                 width={310}
-                                height={120}
+                                height={100}
                                 layout="responsive"
                                 className={styles.idImage}
                               />

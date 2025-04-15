@@ -12,9 +12,9 @@ export default function Hero() {
     router.push("/report/lost"); 
   };
 
-  const handleReportFoundID = () => {
-    router.push("/report/found"); 
-  };
+//   const handleReportFoundID = () => {
+//     router.push("/report/found"); 
+//   };
 
   const handleSearchID = () => {
     router.push("/search"); 
@@ -38,22 +38,25 @@ export default function Hero() {
                                         color="primary"
                                         className={styles.button}
                                         onClick={handleReportLostID} 
+                                        sx={{width:"50%"}}
                                     >
-                                        <Typography className={styles.buttonText}>Report Lost ID</Typography>
+                                        <Typography className={styles.buttonText}>Report ID</Typography>
                                     </Button>
-                                    <Button
+                                    {/* <Button
                                         variant="contained"
                                         color="primary"
                                         className={styles.button}
                                         onClick={handleReportFoundID}
                                     >
                                         <Typography className={styles.buttonText}>Report Found ID</Typography>
-                                    </Button>
+                                    </Button> */}
                                     <Button
                                         variant="contained"
                                         color="primary"
                                         className={styles.button}
                                         onClick={handleSearchID} 
+                                        sx={{width:"50%"}}
+
                                     >
                                         <Typography className={styles.buttonText}>Search ID</Typography>
                                     </Button>

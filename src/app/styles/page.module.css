@@ -88,6 +88,7 @@
 .heroButtonBox{
   display: flex;
   gap: 20px;
+  justify-content: space-between;
 }
 
 .buttonText{
@@ -247,7 +248,7 @@
 .switchBox{
   /* border: 1px solid #fff !important; */
   border-radius: 12px;
-  width: 50%;
+  width: 100%;
   height: 46px;
   display: flex;
   gap: 1px;
@@ -312,11 +313,23 @@
     width: 60%; 
     height: 400px; 
   }
+  .sessionCard{
+    width: 100%;
+    padding: 0px 5px ;
+    /* border: 1px solid red; */
+  }
+  .sessionCardContent{
+    padding: 10px;
+
+  }
 }
+
+
 
 @media (min-width: 960px) {
   .sessionCard {
     width: 50%; 
     height: 500px; 
   }
+
 }

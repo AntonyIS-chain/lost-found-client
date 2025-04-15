@@ -86,11 +86,7 @@ export default function ReportLostForm() {
                   onChange={handleUploadChange}
                 />
 
-                {/* {file && (
-                  <Typography sx={{ color: "white", mt: 1 }}>
-                    Selected: {file}
-                  </Typography>
-                )} */}
+                
                 {/* Button Section */}
                 <Box className={styles.buttonSection}>
                     <Button className={`${styles.button} ${styles.loginButton}`}>
